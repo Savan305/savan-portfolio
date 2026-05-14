@@ -681,108 +681,141 @@
     }
 
     /* ─── PROJECTS ─── */
+    /* ─── PROJECTS — COMPACT ─── */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: 1rem;
     }
 
     .project-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
+      background: rgba(17, 24, 39, 0.6);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
       overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
       display: flex;
       flex-direction: column;
+      backdrop-filter: blur(16px);
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(34,211,238,0.04), transparent 55%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.28s;
     }
 
     .project-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--cyan-border);
-      box-shadow: 0 20px 60px rgba(34, 211, 238, 0.08);
+      transform: translateY(-5px);
+      border-color: rgba(34,211,238,0.28);
+      box-shadow: 0 14px 40px rgba(34,211,238,0.08);
     }
 
+    .project-card:hover::before { opacity: 1; }
+
+    /* compact top bar replaces the giant image placeholder */
     .project-img-placeholder {
       width: 100%;
-      aspect-ratio: 16/9;
+      height: 56px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      padding: 0 1rem;
       position: relative;
       overflow: hidden;
-    }
-
-    .proj-bg-1 {
-      background: linear-gradient(135deg, #0c1f2e 0%, #0b2a1e 100%);
-    }
-
-    .proj-bg-2 {
-      background: linear-gradient(135deg, #1a0d2e 0%, #0d1a3e 100%);
-    }
-
-    .proj-bg-3 {
-      background: linear-gradient(135deg, #0d2233 0%, #1a1040 100%);
+      background: linear-gradient(135deg, rgba(34,211,238,0.06) 0%, rgba(139,92,246,0.06) 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      flex-shrink: 0;
     }
 
     .proj-glow {
       position: absolute;
-      width: 120px;
-      height: 120px;
+      width: 60px; height: 60px;
       border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.5;
+      filter: blur(28px);
+      opacity: 0.35;
     }
 
-    .proj-glow-cyan {
-      background: var(--cyan);
-      top: 20%;
-      left: 30%;
-    }
-
-    .proj-glow-violet {
-      background: var(--violet);
-      bottom: 10%;
-      right: 20%;
-    }
+    .proj-glow-cyan { background: var(--cyan); top: -10px; left: 20%; }
+    .proj-glow-violet { background: var(--violet); top: -10px; right: 20%; }
 
     .project-img-icon {
-      font-size: 3rem;
+      font-size: 1.4rem;
       position: relative;
       z-index: 1;
-      filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.4));
+      filter: drop-shadow(0 0 8px rgba(34,211,238,0.3));
     }
 
     .project-body {
-      padding: 1.5rem;
+      padding: 0.9rem 1rem 1rem;
       flex: 1;
       display: flex;
       flex-direction: column;
+      gap: 0.45rem;
+      position: relative;
+      z-index: 1;
     }
 
     .project-type {
-      font-size: 10px;
+      font-size: 9px;
       font-family: var(--font-mono);
-      color: var(--cyan);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      font-weight: 700;
+      display: inline-block;
+      width: fit-content;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.1rem;
+    }
+
+    .project-type.ml-rag {
+      background: rgba(34,211,238,0.12);
+      color: var(--cyan);
+      border: 1px solid rgba(34,211,238,0.28);
+    }
+
+    .project-type.predictive-genai {
+      background: rgba(139,92,246,0.12);
+      color: var(--violet);
+      border: 1px solid rgba(139,92,246,0.28);
+    }
+
+    .project-type.full-stack {
+      background: rgba(96,165,250,0.12);
+      color: var(--blue);
+      border: 1px solid rgba(96,165,250,0.28);
+    }
+
+    .project-type.machine-learning {
+      background: rgba(34,197,94,0.12);
+      color: #22c55e;
+      border: 1px solid rgba(34,197,94,0.28);
+    }
+
+    .project-type.data-analytics {
+      background: rgba(234,179,8,0.12);
+      color: #eab308;
+      border: 1px solid rgba(234,179,8,0.28);
     }
 
     .project-name {
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: 0.97rem;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 0.6rem;
       line-height: 1.25;
     }
 
     .project-desc {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 1rem;
+      line-height: 1.55;
       font-weight: 300;
       flex: 1;
     }
@@ -790,30 +823,35 @@
     .project-tech {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 1.2rem;
+      gap: 4px;
+      margin-top: 0.2rem;
     }
 
     .tech-badge {
-      font-size: 10px;
+      font-size: 9px;
       font-family: var(--font-mono);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 0.22rem 0.55rem;
-      background: var(--bg3);
+      color: var(--text-dim);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 0.18rem 0.45rem;
+      background: rgba(255,255,255,0.03);
     }
 
     .project-actions {
       display: flex;
-      gap: 8px;
+      margin-top: 0.7rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
 
     .project-actions .btn {
-      flex: 1;
-      justify-content: center;
-      font-size: 12px;
-      padding: 0.55rem 0.8rem;
+      font-size: 11px;
+      padding: 0.42rem 1rem;
+      border-radius: 8px;
+    }
+
+    .project-actions .btn-cyan {
+      border-radius: 8px;
     }
 
     /* ─── SKILLS ─── */
@@ -1318,11 +1356,13 @@
 
     /* ─── CHATBOT ─── */
     .chat-fab {
-      position: fixed;
-      bottom: clamp(1.2rem, 3vw, 2rem);
-      right: clamp(1.2rem, 3vw, 2rem);
-      width: 54px;
-      height: 54px;
+      position: fixed !important;
+      bottom: 2rem !important;
+      right: 2rem !important;
+      left: auto !important;
+      top: auto !important;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--cyan), var(--violet));
       border: none;
@@ -1330,64 +1370,118 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
-      z-index: 200;
-      box-shadow: 0 4px 30px rgba(34, 211, 238, 0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
+      font-size: 1.5rem;
+      z-index: 9999 !important;
+      box-shadow: 0 8px 32px rgba(34, 211, 238, 0.35);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+      animation: fabRingPulse 2.5s ease infinite;
+    }
+
+    @keyframes fabRingPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(34,211,238,0.5), 0 8px 32px rgba(34,211,238,0.35); }
+      65%  { box-shadow: 0 0 0 16px rgba(34,211,238,0), 0 8px 32px rgba(34,211,238,0.35); }
+      100% { box-shadow: 0 0 0 0 rgba(34,211,238,0), 0 8px 32px rgba(34,211,238,0.35); }
     }
 
     .chat-fab:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 40px rgba(34, 211, 238, 0.5);
+      transform: scale(1.12);
+      box-shadow: 0 0 36px rgba(34,211,238,0.55), 0 8px 32px rgba(34,211,238,0.35);
+    }
+
+    .chat-fab.open {
+      transform: rotate(90deg) scale(1.05);
+      animation: none;
     }
 
     .chat-window {
-      position: fixed;
-      bottom: calc(clamp(1.2rem, 3vw, 2rem) + 70px);
-      right: clamp(1.2rem, 3vw, 2rem);
-      width: min(380px, calc(100vw - 2.4rem));
-      height: clamp(420px, 60vh, 540px);
-      background: var(--bg2);
-      border: 1px solid var(--border2);
+      position: fixed !important;
+      bottom: 5.5rem !important;
+      right: 2rem !important;
+      left: auto !important;
+      top: auto !important;
+      width: min(400px, calc(100vw - 2rem));
+      height: clamp(450px, 65vh, 560px);
+      background: #0d1220;
+      border: 1px solid rgba(34,211,238,0.18);
       border-radius: 22px;
-      display: none;
+      display: flex;
       flex-direction: column;
-      z-index: 200;
+      z-index: 9999 !important;
       overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(34, 211, 238, 0.05);
+      box-shadow: 0 0 0 1px rgba(34,211,238,0.06), 0 32px 80px rgba(0,0,0,0.75);
+      transform-origin: bottom right;
+      transform: scale(0.82) translateY(24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.32s cubic-bezier(.34,1.4,.64,1), opacity 0.25s ease;
     }
 
     .chat-window.open {
       display: flex;
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: all;
     }
 
     .chat-header {
-      padding: 1rem 1.2rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 1.2rem;
+      background: rgba(255,255,255,0.03);
       display: flex;
       align-items: center;
       gap: 0.8rem;
-      background: var(--bg3);
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .chat-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent);
     }
 
     .chat-avatar {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--cyan-dim), var(--violet-dim));
-      border: 1px solid var(--cyan-border);
+      border: 1.5px solid var(--cyan-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 1.1rem;
       flex-shrink: 0;
+      position: relative;
     }
+
+    .chat-avatar::after {
+      content: '';
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      background: #22c55e;
+      border-radius: 50%;
+      bottom: 0; right: 0;
+      border: 2px solid #0d1220;
+      animation: statusBlink 3s ease infinite;
+    }
+
+    @keyframes statusBlink {
+      0%,90%,100% { opacity: 1; }
+      95% { opacity: 0.2; }
+    }
+
+    .chat-header-info { flex: 1; }
 
     .chat-header-info h4 {
       font-family: var(--font-display);
       font-size: 13px;
       font-weight: 700;
       color: var(--text);
+      margin-bottom: 2px;
     }
 
     .chat-header-info p {
@@ -1397,186 +1491,195 @@
     }
 
     .chat-close {
-      margin-left: auto;
-      background: none;
-      border: none;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 1rem;
-      padding: 4px;
-      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
     }
 
     .chat-close:hover {
-      color: var(--text);
-    }
-
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
-    }
-
-    .chat-msg {
-      max-width: 88%;
-      padding: 0.65rem 1rem;
-      border-radius: 16px;
-      font-size: 13px;
-      line-height: 1.55;
-      animation: msgIn 0.2s ease;
-    }
-
-    @keyframes msgIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .chat-msg.bot {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      border-radius: 4px 16px 16px 16px;
-    }
-
-    .chat-msg.user {
-      background: linear-gradient(135deg, var(--cyan), #0ea5e9);
-      color: #000;
-      align-self: flex-end;
-      border-radius: 16px 16px 4px 16px;
-      font-weight: 600;
-    }
-
-    .chat-typing {
-      display: flex;
-      gap: 4px;
-      padding: 0.65rem 1rem;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 4px 16px 16px 16px;
-      max-width: 60px;
-    }
-
-    .chat-typing span {
-      width: 6px;
-      height: 6px;
-      background: var(--cyan);
-      border-radius: 50%;
-      animation: bounce 1.2s infinite;
-      opacity: 0.6;
-    }
-
-    .chat-typing span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .chat-typing span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes bounce {
-
-      0%,
-      60%,
-      100% {
-        transform: translateY(0);
-      }
-
-      30% {
-        transform: translateY(-6px);
-      }
+      background: rgba(255,255,255,0.1);
+      color: #fff;
     }
 
     .chat-quick {
-      padding: 0.6rem 1rem;
+      padding: 0.6rem 0.8rem;
       display: flex;
       gap: 0.4rem;
       flex-wrap: nowrap;
       overflow-x: auto;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
       scrollbar-width: none;
+      background: rgba(255,255,255,0.01);
+      flex-shrink: 0;
     }
 
-    .chat-quick::-webkit-scrollbar {
-      display: none;
-    }
+    .chat-quick::-webkit-scrollbar { display: none; }
 
     .quick-btn {
       white-space: nowrap;
       font-size: 10px;
       font-family: var(--font-mono);
       color: var(--text-muted);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.28rem 0.65rem;
-      background: var(--bg3);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 0.28rem 0.75rem;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.18s;
       letter-spacing: 0.02em;
     }
 
     .quick-btn:hover {
-      border-color: var(--cyan-border);
+      background: rgba(34,211,238,0.08);
+      border-color: rgba(34,211,238,0.4);
       color: var(--cyan);
     }
 
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 0.9rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.07) transparent;
+    }
+
+    .chat-messages::-webkit-scrollbar { width: 3px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+    .chat-msg {
+      max-width: 88%;
+      padding: 0.65rem 1rem;
+      border-radius: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      animation: msgIn 0.22s cubic-bezier(.34,1.4,.64,1) both;
+    }
+
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .chat-msg.bot {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      color: #cbd5e1;
+      border-radius: 4px 16px 16px 16px;
+      align-self: flex-start;
+    }
+
+    .chat-msg.user {
+      background: linear-gradient(135deg, var(--cyan), #0ea5e9);
+      color: #001419;
+      align-self: flex-end;
+      border-radius: 16px 16px 4px 16px;
+      font-weight: 600;
+    }
+
+    .chat-typing {
+      display: inline-flex;
+      gap: 5px;
+      padding: 0.65rem 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px 16px 16px 16px;
+      align-self: flex-start;
+      align-items: center;
+    }
+
+    .chat-typing span {
+      width: 7px; height: 7px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: typingBounce 1.3s ease infinite;
+      opacity: 0.6;
+    }
+
+    .chat-typing span:nth-child(2) { animation-delay: 0.18s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.36s; }
+
+    @keyframes typingBounce {
+      0%,60%,100% { transform: translateY(0); opacity: 0.6; }
+      30% { transform: translateY(-7px); opacity: 1; }
+    }
+
     .chat-input-area {
-      padding: 0.8rem;
-      border-top: 1px solid var(--border);
+      padding: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
       display: flex;
       gap: 0.5rem;
-      background: var(--bg3);
+      background: rgba(255,255,255,0.02);
+      align-items: center;
+      flex-shrink: 0;
     }
 
     .chat-input {
       flex: 1;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.55rem 0.9rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+      padding: 0.6rem 1rem;
       font-size: 13px;
-      color: var(--text);
+      color: #e2e8f0;
       outline: none;
-      min-height: unset;
-      resize: none;
       font-family: var(--font-body);
+      resize: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: unset;
     }
 
     .chat-input:focus {
-      border-color: var(--cyan-border);
+      border-color: rgba(34,211,238,0.4);
+      box-shadow: 0 0 0 3px rgba(34,211,238,0.06);
     }
 
+    .chat-input::placeholder { color: #4b5563; }
+
     .chat-send {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+      width: 38px; height: 38px;
+      border-radius: 12px;
       background: linear-gradient(135deg, var(--cyan), #0ea5e9);
       border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
-      transition: all 0.2s;
+      font-size: 1rem;
+      color: #001419;
+      font-weight: 900;
+      transition: transform 0.2s, box-shadow 0.2s;
       flex-shrink: 0;
-      align-self: flex-end;
-      color: #000;
-      font-weight: 700;
     }
 
     .chat-send:hover {
-      transform: scale(1.08);
+      transform: scale(1.1);
+      box-shadow: 0 4px 16px rgba(34,211,238,0.3);
+    }
+
+    @media (max-width: 480px) {
+      .chat-fab {
+        bottom: 1rem !important;
+        right: 1rem !important;
+        width: 54px !important;
+        height: 54px !important;
+      }
+      .chat-window {
+        right: 0.5rem !important;
+        bottom: 4.5rem !important;
+        width: calc(100vw - 1rem) !important;
+      }
     }
 
     /* ─── FOOTER ─── */
@@ -1799,73 +1902,169 @@
       <div class="projects-grid reveal">
 
         <div class="project-card">
-          <div class="project-img-placeholder proj-bg-1">
+          <div class="project-img-placeholder">
             <div class="proj-glow proj-glow-cyan"></div>
+            <div class="project-img-icon">🤖</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type ml-rag">RAG/GenAI</div>
+            <div class="project-name">Ragora AI</div>
+            <div class="project-desc">Advanced RAG system for intelligent document processing and retrieval with real-time AI responses.</div>
+            <div class="project-tech">
+              <span class="tech-badge">LangChain</span>
+              <span class="tech-badge">FAISS</span>
+              <span class="tech-badge">Groq</span>
+              <span class="tech-badge">Streamlit</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Savan305/Ragora-AI" class="btn btn-cyan">GitHub →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <div class="proj-glow proj-glow-violet"></div>
+            <div class="project-img-icon">🎬</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type predictive-genai">Generative AI</div>
+            <div class="project-name">Movie Information Extractor</div>
+            <div class="project-desc">Extracts structured movie data using LLMs and validates with Pydantic models for accurate information.</div>
+            <div class="project-tech">
+              <span class="tech-badge">LangChain</span>
+              <span class="tech-badge">Mistral AI</span>
+              <span class="tech-badge">Pydantic</span>
+              <span class="tech-badge">Streamlit</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Savan305/cinesage-movie-extractor" class="btn btn-cyan">GitHub →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <div class="proj-glow proj-glow-cyan"></div>
+            <div class="project-img-icon">💰</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type full-stack">Full Stack ML</div>
+            <div class="project-name">Insurance Premium Predictor</div>
+            <div class="project-desc">Predicts insurance premiums using ML models with a FastAPI backend and Streamlit frontend for real-time estimates.</div>
+            <div class="project-tech">
+              <span class="tech-badge">FastAPI</span>
+              <span class="tech-badge">Scikit-learn</span>
+              <span class="tech-badge">Streamlit</span>
+              <span class="tech-badge">Python</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Savan305/patient-management-system-fastapi" class="btn btn-cyan">GitHub →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <div class="proj-glow proj-glow-violet"></div>
+            <div class="project-img-icon">📋</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type machine-learning">Machine Learning</div>
+            <div class="project-name">Loan Approval Prediction</div>
+            <div class="project-desc">Classifies loan applications with Scikit-learn models. Deployed with Streamlit for instant approval predictions.</div>
+            <div class="project-tech">
+              <span class="tech-badge">Scikit-learn</span>
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Streamlit</span>
+              <span class="tech-badge">Pickle</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Savan305/synent-task8-Loan-Prediction-Savan-patel" class="btn btn-cyan">GitHub →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <div class="proj-glow proj-glow-cyan"></div>
+            <div class="project-img-icon">📈</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type data-analytics">Data Analytics</div>
+            <div class="project-name">NIFTY 50 Stock Analysis</div>
+            <div class="project-desc">Comprehensive EDA and visualization of NIFTY 50 stock data using Pandas and Matplotlib for market insights.</div>
+            <div class="project-tech">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Pandas</span>
+              <span class="tech-badge">Matplotlib</span>
+              <span class="tech-badge">EDA</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Savan305/synent-task-7--Time-Series-Analysis-Savanpatel" class="btn btn-cyan">GitHub →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <div class="proj-glow proj-glow-violet"></div>
             <div class="project-img-icon">🌾</div>
           </div>
           <div class="project-body">
-            <div class="project-type">Machine Learning</div>
+            <div class="project-type machine-learning">Machine Learning</div>
             <div class="project-name">Crop Recommendation System</div>
-            <div class="project-desc">Predicts the best crop to grow based on soil parameters (N, P, K), temperature,
-              humidity, pH, and rainfall. Uses classification algorithms with a Streamlit interface for farmers.</div>
+            <div class="project-desc">Recommends optimal crops based on soil parameters, climate data, and ML classification models for farmers.</div>
             <div class="project-tech">
               <span class="tech-badge">Python</span>
               <span class="tech-badge">Scikit-learn</span>
               <span class="tech-badge">Pandas</span>
               <span class="tech-badge">Streamlit</span>
-              <span class="tech-badge">NumPy</span>
             </div>
             <div class="project-actions">
-              <a href="#" class="btn btn-cyan">Live Demo</a>
-              <a href="#" class="btn btn-outline">GitHub</a>
+              <a href="https://github.com/Savan305/Crop-recommendation-system" class="btn btn-cyan">GitHub →</a>
             </div>
           </div>
         </div>
 
         <div class="project-card">
-          <div class="project-img-placeholder proj-bg-2">
-            <div class="proj-glow proj-glow-violet"></div>
+          <div class="project-img-placeholder">
+            <div class="proj-glow proj-glow-cyan"></div>
             <div class="project-img-icon">🎓</div>
           </div>
           <div class="project-body">
-            <div class="project-type">Predictive ML</div>
+            <div class="project-type predictive-genai">Predictive ML</div>
             <div class="project-name">Student Performance Predictor</div>
-            <div class="project-desc">Predicts student academic performance based on study hours, attendance, past
-              grades, and socio-economic factors. Includes data visualization and a clean web interface.</div>
+            <div class="project-desc">Predicts student grades using regression with Flask backend. Includes data visualization and detailed analytics.</div>
             <div class="project-tech">
               <span class="tech-badge">Python</span>
               <span class="tech-badge">Scikit-learn</span>
-              <span class="tech-badge">Matplotlib</span>
-              <span class="tech-badge">Pandas</span>
               <span class="tech-badge">Flask</span>
+              <span class="tech-badge">Pandas</span>
             </div>
             <div class="project-actions">
-              <a href="#" class="btn btn-cyan">Live Demo</a>
-              <a href="#" class="btn btn-outline">GitHub</a>
+              <a href="https://github.com/Savan305/student-prediction-system" class="btn btn-cyan">GitHub →</a>
             </div>
           </div>
         </div>
 
         <div class="project-card">
-          <div class="project-img-placeholder proj-bg-3">
-            <div class="proj-glow proj-glow-cyan"></div>
+          <div class="project-img-placeholder">
+            <div class="proj-glow proj-glow-violet"></div>
             <div class="project-img-icon">📄</div>
           </div>
           <div class="project-body">
-            <div class="project-type">RAG Application</div>
+            <div class="project-type ml-rag">RAG Application</div>
             <div class="project-name">PDF RAG Chatbot</div>
-            <div class="project-desc">Upload a PDF and ask questions about its content. Uses LangChain, FAISS for vector
-              search, and Groq API for fast, accurate answers — all through a simple Streamlit UI.</div>
+            <div class="project-desc">Upload PDFs and ask questions about content. Uses LangChain, FAISS for search, and Groq for fast inference.</div>
             <div class="project-tech">
               <span class="tech-badge">LangChain</span>
               <span class="tech-badge">FAISS</span>
               <span class="tech-badge">Groq API</span>
               <span class="tech-badge">Streamlit</span>
-              <span class="tech-badge">Python</span>
             </div>
             <div class="project-actions">
-              <a href="#" class="btn btn-cyan">Live Demo</a>
-              <a href="#" class="btn btn-outline">GitHub</a>
+              <a href="https://github.com/Savan305/PDF-RAG-chatbot" class="btn btn-cyan">GitHub →</a>
             </div>
           </div>
         </div>
@@ -2085,7 +2284,7 @@
       <div class="chat-avatar">🤖</div>
       <div class="chat-header-info">
         <h4>Savan's AI Assistant</h4>
-        <p>Powered by AI · Online</p>
+        <p style="color:var(--cyan);font-family:var(--font-mono);font-size:10px;">● Online &amp; Ready to Help</p>
       </div>
       <button class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
     </div>
@@ -2093,13 +2292,13 @@
       <button class="quick-btn" onclick="quickAsk('skills')">Skills</button>
       <button class="quick-btn" onclick="quickAsk('projects')">Projects</button>
       <button class="quick-btn" onclick="quickAsk('learning')">Learning</button>
-      <button class="quick-btn" onclick="quickAsk('resume')">Resume</button>
-      <button class="quick-btn" onclick="quickAsk('availability')">Availability</button>
+      <button class="quick-btn" onclick="quickAsk('hire')">Hire</button>
+      <button class="quick-btn" onclick="quickAsk('github')">GitHub</button>
       <button class="quick-btn" onclick="quickAsk('contact')">Contact</button>
+      <button class="quick-btn" onclick="quickAsk('resume')">Resume</button>
     </div>
     <div class="chat-messages" id="chatMessages">
-      <div class="chat-msg bot">Hi! I'm Savan's AI assistant. Ask me anything about his projects, Python skills, AI/ML
-        learning, or resume. 👋</div>
+      <div class="chat-msg bot">Hi! 👋 I'm Savan's AI assistant. Ask me about his skills, projects, learning journey, or how to get in touch!</div>
     </div>
     <div class="chat-input-area">
       <input class="chat-input" id="chatInput" placeholder="Ask me anything..." />
@@ -2165,20 +2364,31 @@
     const chatInput = document.getElementById('chatInput');
     const chatSend = document.getElementById('chatSend');
 
+    // Make window always flex (visibility controlled by opacity/pointer-events via .open class)
+    chatWindow.style.display = 'flex';
+
     chatFab.addEventListener('click', () => {
-      chatWindow.classList.toggle('open');
-      if (chatWindow.classList.contains('open')) chatInput.focus();
+      const isOpen = chatWindow.classList.toggle('open');
+      chatFab.classList.toggle('open', isOpen);
+      if (isOpen) { setTimeout(() => chatInput.focus(), 100); }
     });
-    chatClose.addEventListener('click', () => chatWindow.classList.remove('open'));
+    chatClose.addEventListener('click', () => {
+      chatWindow.classList.remove('open');
+      chatFab.classList.remove('open');
+    });
 
     const KB = {
-      skills: "Savan's core skills: Python (primary language), Machine Learning with Scikit-learn, Deep Learning with TensorFlow, NLP, Data Science with Pandas & NumPy, RAG systems with LangChain & FAISS, Groq API, FastAPI, Flask, and Streamlit for ML apps.",
-      projects: "Savan has built 3 projects: 1) Crop Recommendation System — ML model using soil & climate data with Streamlit UI. 2) Student Performance Predictor — predicts grades using regression/classification with Flask. 3) PDF RAG Chatbot — LangChain + FAISS + Groq API for document Q&A. All on GitHub!",
-      learning: "Currently learning: RAG Pipelines (advanced techniques), LangChain (agents & chains), LLM Applications, Generative AI concepts, Vector Databases (FAISS, ChromaDB), and FastAPI. Actively building projects while learning.",
-      resume: "You can download Savan's resume from the 'Download Resume' button on this site, or email savan@example.com to request it. It includes projects, skills, and his NPTEL Python for Data Science certification.",
-      availability: "Savan is currently available for: internships (immediate joining), entry-level AI/ML developer roles, freelance Python/ML projects, and open source collaboration. Preferred: Remote / India.",
-      contact: "Reach Savan at: Email — savan@example.com | LinkedIn — linkedin.com/in/savan | GitHub — github.com/savan. Or use the contact form on this page. He typically replies within 24 hours.",
-      certification: "Savan holds one certification: NPTEL — Python for Data Science (2024). He's currently working through DeepLearning.AI courses on ML and LangChain."
+      skills: "Savan's core technical skills: Python (primary language), Machine Learning (Scikit-learn, TensorFlow), Deep Learning, NLP, Data Science (Pandas, NumPy, Matplotlib), RAG systems (LangChain, FAISS), Vector databases, Groq API, FastAPI, Flask, Streamlit, SQL, Git, and more. He's proficient with ML workflows and AI application development.",
+      projects: "Savan has built 8 impressive projects: 1) Ragora AI (LangChain + FAISS + Groq), 2) Movie Information Extractor (Mistral AI + Pydantic), 3) Insurance Premium Predictor (FastAPI + ML), 4) Loan Approval Prediction (Scikit-learn), 5) NIFTY 50 Stock Analysis (Data Analytics), 6) Crop Recommendation System (ML classifier), 7) Student Performance Predictor (Flask + ML), 8) PDF RAG Chatbot (LangChain + FAISS). All code is on GitHub!",
+      learning: "Currently deepening expertise in: RAG Pipelines and advanced techniques, LangChain agents & chains, LLM applications, Generative AI, Vector databases (FAISS, ChromaDB), FastAPI development, and more. Savan is actively building projects while learning—combining theory with hands-on practice.",
+      hire: "Savan is available for: Internships (immediate joining preferred), Entry-level AI/ML Developer roles, Freelance Python & ML projects, Open source contributions, and collaborative initiatives. He's seeking remote opportunities or India-based positions. Highly motivated and quick to adapt!",
+      github: "Visit Savan's GitHub profile: github.com/Savan305 — Explore 10+ repositories, 48+ contributions this year, and various AI/ML projects including RAG systems, predictive models, and data analytics work.",
+      contact: "Reach Savan at: Email — savanmpatel2106@example.com | LinkedIn — linkedin.com/in/savan-patel-777aa3323 | GitHub — github.com/Savan305 | Use the contact form on this site. He typically responds within 24 hours!",
+      resume: "Download Savan's resume from the 'Download Resume' button at the top of this page or in the footer. It includes all projects, skills, certifications, and professional experience. Available as PDF.",
+      certification: "Certifications & Credentials: NPTEL Python for Data Science (2024). Currently working through DeepLearning.AI courses on Machine Learning and LangChain for advanced LLM applications.",
+      rag: "Expertise in RAG (Retrieval-Augmented Generation) systems: LangChain for orchestration, FAISS for vector search, Groq API for fast inference, and Streamlit for UI. Built PDF RAG Chatbot and Ragora AI with these technologies.",
+      genai: "Generative AI experience: Working with LLMs (Groq, Mistral AI), prompt engineering, structured outputs with Pydantic, and building AI-powered applications. Projects include Movie Information Extractor and Ragora AI.",
+      about: "Savan is a Computer Engineering student passionate about Python, Machine Learning, Data Science, NLP, and RAG systems. He combines solid fundamentals with hands-on project building. Currently seeking internships and entry-level AI/ML roles to make impact in intelligent systems."
     };
 
     function addMsg(text, role) {
@@ -2210,14 +2420,20 @@
       await new Promise(r => setTimeout(r, 700 + Math.random() * 500));
       removeTyping();
       const lower = text.toLowerCase();
-      let reply = "Great question! For the most detailed info, feel free to email savan@example.com or use the contact form. I'm happy to help with any specific topic!";
+      let reply = "Great question! For more details, feel free to email savanmpatel2106@example.com or check the contact form. Happy to help!";
       for (const [key, val] of Object.entries(KB)) {
         if (lower.includes(key) ||
-          (key === 'skills' && (lower.includes('skill') || lower.includes('know') || lower.includes('tech') || lower.includes('stack'))) ||
-          (key === 'projects' && (lower.includes('project') || lower.includes('work') || lower.includes('built') || lower.includes('portfolio'))) ||
-          (key === 'learning' && (lower.includes('learn') || lower.includes('studying') || lower.includes('currently'))) ||
-          (key === 'availability' && (lower.includes('avail') || lower.includes('hire') || lower.includes('intern') || lower.includes('job') || lower.includes('open to'))) ||
-          (key === 'contact' && (lower.includes('contact') || lower.includes('reach') || lower.includes('email') || lower.includes('linkedin')))
+          (key === 'skills' && (lower.includes('skill') || lower.includes('know') || lower.includes('tech') || lower.includes('stack') || lower.includes('expertise'))) ||
+          (key === 'projects' && (lower.includes('project') || lower.includes('work') || lower.includes('built') || lower.includes('portfolio') || lower.includes('what have you'))) ||
+          (key === 'learning' && (lower.includes('learn') || lower.includes('studying') || lower.includes('currently') || lower.includes('learning'))) ||
+          (key === 'hire' && (lower.includes('hire') || lower.includes('avail') || lower.includes('intern') || lower.includes('job') || lower.includes('open to') || lower.includes('available'))) ||
+          (key === 'github' && (lower.includes('github') || lower.includes('repositories') || lower.includes('repo'))) ||
+          (key === 'contact' && (lower.includes('contact') || lower.includes('reach') || lower.includes('email') || lower.includes('linkedin') || lower.includes('phone'))) ||
+          (key === 'resume' && (lower.includes('resume') || lower.includes('cv') || lower.includes('download'))) ||
+          (key === 'certification' && (lower.includes('cert') || lower.includes('credential') || lower.includes('nptel'))) ||
+          (key === 'rag' && (lower.includes('rag') || lower.includes('retrieval'))) ||
+          (key === 'genai' && (lower.includes('genai') || lower.includes('generative') || lower.includes('llm'))) ||
+          (key === 'about' && (lower.includes('about') || lower.includes('who are you') || lower.includes('tell me about')))
         ) {
           reply = val;
           break;
@@ -2234,11 +2450,12 @@
     function quickAsk(topic) {
       const labels = {
         skills: "What are Savan's skills?",
-        projects: "Tell me about his projects",
-        learning: "What is he currently learning?",
-        resume: "How do I get the resume?",
-        availability: "Is Savan available for hire?",
-        contact: "How can I contact Savan?"
+        projects: "Tell me about Savan's projects",
+        learning: "What is Savan currently learning?",
+        hire: "Is Savan available for hire?",
+        github: "What's Savan's GitHub?",
+        contact: "How can I contact Savan?",
+        resume: "How do I get Savan's resume?"
       };
       sendMessage(labels[topic] || topic);
     }
