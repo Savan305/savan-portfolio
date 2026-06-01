@@ -2,7 +2,7 @@
 
 A modern and responsive personal portfolio website built to showcase my projects, skills, certifications, GitHub activity, and AI/ML journey. Designed with a futuristic UI, smooth animations, glassmorphism effects, and interactive components to create a strong developer presence online.
 
----
+--
 
 ## 🌐 Live Preview
 
