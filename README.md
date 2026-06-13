@@ -120,7 +120,7 @@ Open index.html in browser
 - Add blog section
 - Deploy AI chatbot with real API integration
 
----
+--
 
 ## ⭐ Support
 
